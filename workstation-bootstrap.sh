@@ -30,7 +30,7 @@ wb_install () {
 	fi
 
 	if [[ $? != 0 ]]; then
-		echo "installing ${installation_func}"
+		echo "installing ${installation_func#*_}"
 		$installation_func
 	else
 		echo "${installation_func#*_} already installed"
@@ -54,6 +54,7 @@ wb_replace_system_version_via_brew () {
 
 	brew ls | grep "^${homebrew_name}$" >/dev/null
 	if [[ $? != 0 ]]; then
+		echo "installing ${installation_func#*_}"
 		$installation_func
 	else
 		echo "${installation_func#*_} already installed via Homebrew"
